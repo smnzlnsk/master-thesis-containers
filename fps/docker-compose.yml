@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  fps-benchmark:
+    # Uncomment one of the following options:
+    # Option 1: Build from local Dockerfile
+    build:
+      context: .
+      args:
+        VERSION: ${VERSION:-0.0.1}
+    image: fps-benchmarking:${VERSION:-0.0.1}
+    # Option 2: Use image from local registry
+    # image: localhost:5000/fps-benchmarking:${VERSION:-0.0.1}
+    container_name: fps-benchmarking
+    volumes:
+      - /metrics:/metrics
+    restart: unless-stopped
+    labels:
+      version: ${VERSION:-0.0.1} 

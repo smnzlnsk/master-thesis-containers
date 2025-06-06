@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  benchmark:
+    # Uncomment one of the following options:
+    # Option 1: Build from local Dockerfile
+    build:
+      context: .
+      args:
+        VERSION: ${VERSION:-0.0.1}
+    # Option 2: Use image from local registry
+    # image: localhost:5000/go-benchmark:${VERSION:-0.0.1}
+    image: go-benchmark:${VERSION:-0.0.1}
+    container_name: go-benchmark
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    labels:
+      version: ${VERSION:-0.0.1}
+    # CPU limits can be set here
+    # cpu_count: 2          # Number of CPUs
+    # cpus: 2.0             # Portion of CPU resources (2 CPUs)
+    # cpu_shares: 1024      # Relative CPU share (1024 = 1 CPU)
+    
+    # Memory limits can be set here
+    # mem_limit: 2g         # Maximum amount of memory the container can use
+    # memswap_limit: 2g     # Total amount of memory + swap 
